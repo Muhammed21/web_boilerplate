@@ -111,11 +111,13 @@ class ProjectGenerator:
             os.mkdir(f"{self.project_folder_name}/public/fonts")
             os.mkdir(f"{self.project_folder_name}/public/fonts/otf")
             os.mkdir(f"{self.project_folder_name}/public/fonts/ttf")
+            os.mkdir(f"{self.project_folder_name}/js")
         else:
             print("The project type is not valid!")
             
     def readTemplate(self): # Méthode qui créer des variables (propriété) puis l
         self.html_template = ""
+        self.js_template = ""
         self.reset_css = ""
         self.design_system_css = ""
         self.style_css = ""
@@ -132,6 +134,8 @@ class ProjectGenerator:
                 self.design_system_css = f.read()
         with open('template/template_style_css.txt') as f:
             self.style_css = f.read()
+        with open('template/template_js.txt') as f:
+            self.js_template = f.read()
             
     def buildHTMLFundation(self):
         # html = HTML("", {"lang":f"{country}"}).add([
@@ -150,6 +154,7 @@ class ProjectGenerator:
         fileManager.create_file(f"{self.project_folder_name}/public/styles"+"/reset", f"{self.reset_css}", ".css")
         fileManager.create_file(f"{self.project_folder_name}/public/styles"+"/design_system", f"{self.design_system_css}", ".css")
         fileManager.create_file(f"{self.project_folder_name}/public/styles"+"/style", f"{self.style_css}", ".css")
+        fileManager.create_file(f"{self.project_folder_name}/js"+"/script", f"{self.js_template}", ".js")
         fileManager.create_file(f"{self.project_folder_name}"+"/index", f"{self.html_template}", ".html")
 
 projectWeb = ProjectGenerator()
